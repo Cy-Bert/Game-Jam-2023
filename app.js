@@ -5,7 +5,7 @@ world.width = world.clientWidth;
 world.height = world.clientHeight;
 
 let frames = 0;
-const missiles = [];
+const enemies = [];
 
 const keys = {
   ArrowLeft: { pressed: false },
@@ -21,16 +21,16 @@ class Player {
       y: 0, // Vitesse de déplacement sur l'axe des Y
     };
 
-    const image = new Image();
-    image.src = "Assets/Img/space.png";
-    image.onload = () => {
-      this.image = image;
+    this.image = new Image();
+    this.image.src = "Assets/Img/space.png";
+    this.image.onload = () => {
       this.width = 48;
       this.height = 48;
       this.position = {
         x: world.width / 2 - this.width / 2,
         y: world.height - this.height - 10,
       };
+      this.draw(); // Call draw() after the image is loaded
     };
   }
 
@@ -44,62 +44,45 @@ class Player {
     );
   }
 
-  shoot() {
-    missiles.push(
-      new Missile({
-        position: {
-          x: this.position.x + this.width / 2,
-          y: this.position.y,
-        },
-      })
-    );
-  }
-
   update() {
     if (this.image) {
       if (keys.ArrowLeft.pressed && this.position.x >= 0) {
-        this.velocity.x = -5;
+        this.position.x -= 5; // Update the position by subtracting from x
       } else if (
         keys.ArrowRight.pressed &&
         this.position.x <= world.width - this.width
       ) {
-        this.velocity.x = 5;
-      } else {
-        this.velocity.x = 0;
+        this.position.x += 5; // Update the position by adding to x
       }
-      this.position.x += this.velocity.x;
       this.draw();
     }
   }
 }
- const base_spawn = [[coordonée_x, velocity_x]]
- let spawn = Math.floor(Math.random() * base_spawn.length)
+
+const base_spawn = [-5, -2, 0, 2, 5];
+
+// const base_enemy = [[Frame1, Frame2]];
+// let enemy_sprite = Math.floor(Math.random() * base_enemy.length);
 class Enemy {
-    constructor({position}){
-        position = {x:base_spawn[spawn][0], y: world.height / 4};
-        this.velocity = {x:base_spawn[spawn][1],y:-5};
-        const image = new Image();
-    image.src = "Assets/Img/ghost.png";
-    image.onload = () => {
-      this.image = image;
-      this.width = 48;
-      this.height = 48;
-      this.position = {
-        x: world.width / 2 - this.width / 2,
-        y: world.height - this.height - 10,
-      };
+  constructor() {
+    this.position = { x: world.width / 2, y: world.height / 4 };
+    this.velocity = {
+      x: base_spawn[Math.floor(Math.random() * base_spawn.length)],
+      y: 5,
     };
-
-
-    }
-}
-
-class Missile {
-  constructor({ position }) {
-    this.position = position;
-    this.velocity = { x: 0, y: -5 };
     this.width = 3;
     this.height = 10;
+    // const image = new Image();
+    // image.src = "Assets/Img/ghost.png";
+    // image.onload = () => {
+    //   this.image = image;
+    //   this.width = 48;
+    //   this.height = 48;
+    //   this.position = {
+    //     x: world.width / 2 - this.width / 2,
+    //     y: world.height - this.height - 10,
+    //   };
+    // };
   }
   draw() {
     c.fillStyle = "red";
@@ -108,6 +91,9 @@ class Missile {
   update() {
     this.position.y += this.velocity.y;
     this.draw();
+  }
+  shoot() {
+    enemies.push(new Enemy());
   }
 }
 
@@ -118,44 +104,37 @@ const animationLoop = () => {
   requestAnimationFrame(animationLoop);
   c.clearRect(0, 0, world.width, world.height);
   player.update();
-  missiles.forEach((missile, index) => {
-    if (missile.position.y + missile.height <= 0) {
+  enemies.forEach((enemy, index) => {
+    if (enemy.position.y <= 0) {
       setTimeout(() => {
-        missiles.splice(index, 1);
+        enemies.splice(index, 1);
       }, 0);
     } else {
-      missile.update();
+      enemy.update();
     }
   });
   frames++;
 };
 animationLoop();
 
-addEventListener("keydown", ({ key }) => {
-  switch (key) {
+addEventListener("keydown", (event) => {
+  switch (event.key) {
     case "ArrowLeft":
       keys.ArrowLeft.pressed = true;
-      console.log("gauche");
       break;
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
-      console.log("droite");
       break;
   }
 });
 
-addEventListener("keyup", ({ key }) => {
-  switch (key) {
+addEventListener("keyup", (event) => {
+  switch (event.key) {
     case "ArrowLeft":
       keys.ArrowLeft.pressed = false;
-      console.log("gauche");
       break;
     case "ArrowRight":
       keys.ArrowRight.pressed = false;
-      console.log("droite");
       break;
-    case " ":
-      player.shoot();
-      console.log(missiles);
   }
 });
