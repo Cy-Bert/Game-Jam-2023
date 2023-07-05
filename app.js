@@ -1,11 +1,11 @@
-const world = document.querySelector("#gameBoard");
-const c = world.getContext("2d");
+const world = document.querySelector('#gameBoard');
+const c = world.getContext('2d');
 
 world.width = world.clientWidth;
 world.height = world.clientHeight;
 
-let frames = 0;
-const missiles = [];
+let frames=0;
+const missiles =[];
 
 const keys = {
   ArrowLeft: { pressed: false },
