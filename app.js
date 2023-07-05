@@ -149,5 +149,49 @@ addEventListener('keyup',({key})=>{
     })
 
 
+    // Lecture et Inscription des scores
 
+    function readDatabase() {
+      // Utilisez une requête AJAX ou une méthode appropriée pour lire le fichier JSON
+      // Par exemple, en utilisant Fetch API :
+      return fetch('scores.json')
+        .then(response => response.json())
+        .then(data => {
+          // Utilisez les données lues comme vous le souhaitez
+          console.log(data.score); // Affiche le score
+          // console.log(data.timer); // Affiche le timer
+          return data;
+        })
+        .catch(error => {
+          console.error('Erreur de lecture de la base de données :', error);
+        });
+
+    }
+
+    function writeDatabase(data) {
+      // Utilisez une requête AJAX ou une méthode appropriée pour écrire les données dans le fichier JSON
+      // Par exemple, en utilisant Fetch API :
+      fetch('scores.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          console.log('Données enregistrées avec succès');
+        })
+        .catch(error => {
+          console.error('Erreur d\'écriture de la base de données :', error);
+        });
+    }
+
+        // Exemple d'incrémentation du score
+    function incrementScore() {
+      readDatabase().then(data => {
+        data.score++;
+        writeDatabase(data);
+      });
+    }
+    
 
