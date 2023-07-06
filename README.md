@@ -1,7 +1,7 @@
 # Game-Jam-2023
 Projet Game Jam 2023 OnlineFormaPro
 ## Participants
-* [Cy-Bert](https://github.com/Cy-Bert) : Developpeur.
+* [Cy-Bert](https://github.com/Cy-Bert) : Développeur.
 * [Ange0608](https://github.com/Ange0608) : Développeuse.
 * [Nara64](https://github.com/Nara64) : Développeuse.
 * [Louis-OFP](https://github.com/Louis-OFP)b: Développeur.
