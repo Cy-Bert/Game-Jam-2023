@@ -1,10 +1,10 @@
 # Game-Jam-2023
 Projet Game Jam 2023 OnlineFormaPro
-## Participant
-* [Cy-Bert](https://github.com/Cy-Bert) : Developpeur.
+## Participants
+* [Cy-Bert](https://github.com/Cy-Bert) : Développeur.
 * [Ange0608](https://github.com/Ange0608) : Développeuse.
 * [Nara64](https://github.com/Nara64) : Développeuse.
-* [Louis-OFP](https://github.com/Louis-OFP)b: Développeur.
+* [Louis-OFP](https://github.com/Louis-OFP) : Développeur.
 * [Hukyo21](https://github.com/Hukyo21), (https://www.behance.net/benjaminmigneau) : Designer.
 * [Rababb205](https://github.com/Rababb205), (https://rababbkn.myportfolio.com/) : Designeuse.
 
@@ -30,5 +30,9 @@ Pour ajouter un peu de difficulté, nous avons choisi d'accélérer le défileme
 Le développement du jeu s'est fait majoritairement avec le langage JavaScript, sans librairie. Nous avons choisi de ne pas utiliser de librairie car nous n'avions que 48h, donc nous avons préféré utiliser un langage que nous connaissions.
 
 L'hébergement du projet se fait sur le site Netlify, voici le lien qui mène sur notre jeu : https://hashiru-tanuki.netlify.app/
+
+Voici la vidéo teaser du jeu : https://youtu.be/GUUbZmOpDnM
+
+Amusez vous bien !
 
 
