@@ -1,296 +1,172 @@
-// const world = document.querySelector("#gameBoard");
-// const c = world.getContext("2d");
-
-// world.width = world.clientWidth;
-// world.height = world.clientHeight;
-
-// let frames = 0;
-// const enemies = [];
-
-// const keys = {
-//   ArrowLeft: { pressed: false },
-//   ArrowRight: { pressed: false },
-// };
-
-// class Player {
-//   constructor() {
-//     this.width = 32; // Largeur du player
-//     this.height = 32; // Hauteur du player
-//     this.velocity = {
-//       x: 0, // Vitesse de déplacement sur l'axe des X
-//       y: 0, // Vitesse de déplacement sur l'axe des Y
-//     };
-
-//     this.image = new Image();
-//     this.image.src = "Assets/Img/space.png";
-//     this.image.onload = () => {
-//       this.width = 48;
-//       this.height = 48;
-//       this.position = {
-//         x: world.width / 2 - this.width / 2,
-//         y: world.height - this.height - 10,
-//       };
-//       this.draw(); // Call draw() after the image is loaded
-//     };
-//   }
-
-//   draw() {
-//     c.drawImage(
-//       this.image,
-//       this.position.x,
-//       this.position.y,
-//       this.width,
-//       this.height
-//     );
-//   }
-
-//   update() {
-//     if (this.image) {
-//       if (keys.ArrowLeft.pressed && this.position.x >= 0) {
-//         this.position.x -= 5; // Update the position by subtracting from x
-//       } else if (
-//         keys.ArrowRight.pressed &&
-//         this.position.x <= world.width - this.width
-//       ) {
-//         this.position.x += 5; // Update the position by adding to x
-//       }
-//       this.draw();
-//     }
-//   }
-// }
-
-// const base_spawn = [-5, -2, 0, 2, 5];
-
-// // const base_enemy = [[Frame1, Frame2]];
-// // let enemy_sprite = Math.floor(Math.random() * base_enemy.length);
-// class Enemy {
-//   constructor() {
-//     this.position = { x: world.width / 2, y: world.height / 4 };
-//     this.velocity = {
-//       x: base_spawn[Math.floor(Math.random() * base_spawn.length)],
-//       y: 5,
-//     };
-//     this.width = 3;
-//     this.height = 10;
-//     // const image = new Image();
-//     // image.src = "Assets/Img/ghost.png";
-//     // image.onload = () => {
-//     //   this.image = image;
-//     //   this.width = 48;
-//     //   this.height = 48;
-//     //   this.position = {
-//     //     x: world.width / 2 - this.width / 2,
-//     //     y: world.height - this.height - 10,
-//     //   };
-//     // };
-//   }
-//   draw() {
-//     c.fillStyle = "red";
-//     c.fillRect(this.position.x, this.position.y, this.width, this.height);
-//   }
-//   update() {
-//     this.position.y += this.velocity.y;
-//     this.draw();
-//   }
-//   shoot() {
-//     enemies.push(new Enemy());
-//   }
-// }
-
-// const player = new Player();
-
-// // Boucle d'animation
-// const animationLoop = () => {
-//   requestAnimationFrame(animationLoop);
-//   c.clearRect(0, 0, world.width, world.height);
-//   player.update();
-//   enemies.forEach((enemy, index) => {
-//     if (enemy.position.y <= 0) {
-//       setTimeout(() => {
-//         enemies.splice(index, 1);
-//       }, 0);
-//     } else {
-//       enemy.update();
-//     }
-//   });
-//   frames++;
-// };
-// animationLoop();
-
-// addEventListener("keydown", (event) => {
-//   switch (event.key) {
-//     case "ArrowLeft":
-//       keys.ArrowLeft.pressed = true;
-//       break;
-//     case "ArrowRight":
-//       keys.ArrowRight.pressed = true;
-//       break;
-//   }
-// });
-
-// addEventListener("keyup", (event) => {
-//   switch (event.key) {
-//     case "ArrowLeft":
-//       keys.ArrowLeft.pressed = false;
-//       break;
-//     case "ArrowRight":
-//       keys.ArrowRight.pressed = false;
-//       break;
-//   }
-// });
-
-const world = document.querySelector('#gameBoard');
-const c = world.getContext('2d');
+const world = document.querySelector("#gameBoard");
+const c = world.getContext("2d");
 
 world.width = world.clientWidth;
 world.height = world.clientHeight;
 
-let frames=0;
-const missiles =[];
-const base_spawn = [-6, -3, 0, 3, 6];
+let frames = 0;
+const enemies = [];
+const base_spawn = [-3, 0, 3];
 
 const keys = {
-    ArrowLeft:{   pressed:false   },
-    ArrowRight:{pressed:false  },  
- }
- 
+  ArrowLeft: { pressed: false },
+  ArrowRight: { pressed: false },
+};
 
-class Player{
-    constructor(){
-        this.width=32; // Largeur du player
-        this.height=32; // Hauteur du player
-        this.velocity={
-            x:0, // Vitesse de déplacement sur l'axe des X
-            y:0 // Vitesse de déplacement sur l'axe des Y
-        }
-       
-        const image= new Image();
-        image.src = 'Assets/Img/space.png';
-        image.onload =()=>{
-            this.image = image;
-            this.width=48;
-            this.height=48;
-            this.position={
-                x:world.width/2 - this.width/2,
-                y:world.height - this.height -10
-            }
-           
-        }
-    }
+class Player {
+  constructor() {
+    this.width = 150;
+    this.height = 150;
+    this.velocity = {
+      x: 0,
+      y: 0,
+    };
+    this.position = {
+      x: (world.width - this.width) / 2,
+      y: world.height - this.height,
+    };
 
-    draw(){
-        
-        c.drawImage(this.image,
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height,
-        );
-	}
+    this.image1 = new Image();
+    this.image1.src = "Assets/Img/tanuki_frame1.png";
 
-    shoot(){
-        missiles.push(new Missile({
-            position:{
-                x:world.width/2,
-                y:world.height/4
-            },
-            
-        }));
-    }
-  
-   
-    update(){
-        if(this.image){
-			if(keys.ArrowLeft.pressed && this.position.x >=0){
-				this.velocity.x = -5;
-			}
-			else if(keys.ArrowRight.pressed && this.position.x <= world.width - this.width){
-				this.velocity.x = 5;
-			}
-			else{this.velocity.x =0;}
-        this.position.x += this.velocity.x;
-        this.draw();
-		}
-	}
-}  
+    this.image2 = new Image();
+    this.image2.src = "Assets/Img/tanuki_frame2.png";
 
-class Missile{
-    constructor({position}){
-        this.position = position;
-        this.velocity ={x:base_spawn[Math.floor(Math.random() * base_spawn.length)],y:5} ;
-        this.width = 3;
-        this.height =10;
-        
+    this.currentImage = this.image1;
+    this.imageIndex = 1;
+    this.imageInterval = 10; // Intervalle pour alterner les images
+    this.imageCounter = 0;
+  }
+
+  draw() {
+    c.drawImage(
+      this.currentImage,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
+  }
+
+  shoot() {
+    enemies.push(
+      new Enemy({
+        position: {
+          x: world.width / 2,
+          y: world.height / 5,
+        },
+      })
+    );
+  }
+  animate() {
+    this.imageCounter++;
+    if (this.imageCounter >= this.imageInterval) {
+      this.imageCounter = 0;
+      this.imageIndex = this.imageIndex === 1 ? 2 : 1; // Alterne entre 1 et 2
+      this.currentImage = this.imageIndex === 1 ? this.image1 : this.image2;
     }
-    draw(){
-        c.fillStyle='red';
-        c.fillRect(this.position.x,this.position.y,this.width,this.height)
-      
-   
-    }
-    update(){
-        this.position.y += this.velocity.y;
-        this.position.x += this.velocity.x;
-        this.draw();
-    }
+  }
+
+  update() {
+    if (keys.ArrowLeft.pressed && this.position.x >= world.width / 5) {
+      this.velocity.x = -10;
+    } else if (
+      keys.ArrowRight.pressed &&
+      this.position.x <= world.width - this.width - world.width / 5
+    ) {
+      this.velocity.x = 10;
+    } else this.velocity.x = 0;
+    this.position.x += this.velocity.x;
+    this.animate(); // Appelle la méthode d'animation
+    this.draw();
+  }
 }
 
-
+class Enemy {
+  constructor({ position }) {
+    this.position = position;
+    this.velocity = {
+      x: base_spawn[Math.floor(Math.random() * base_spawn.length)],
+      y: 5,
+    };
+    this.width = 3;
+    this.height = 10;
+  }
+  draw() {
+    c.fillStyle = "red";
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+  update() {
+    this.position.y += this.velocity.y;
+    this.position.x += this.velocity.x;
+    this.draw();
+  }
+}
 
 const player = new Player();
 
-
+let lifes = 1;
+const lostLife = () => {
+  lifes--;
+  if (lifes <= 0) {
+    alert("perdu");
+    init();
+  }
+};
 
 // Boucle d'animation
-const animationLoop= ()=>{
-    requestAnimationFrame(animationLoop);
-    c.clearRect(0,0,world.width,world.height);
-    player.update();
-    missiles.forEach((missile,index) =>{
-        if(missile.position.y + missile.height <=0) { 
-            setTimeout(() =>{
-                missiles.splice(index,1)} 
-				,0)}
-        else{missile.update();}
-    }) 
-   frames++;
-    
-}
+const animationLoop = () => {
+  requestAnimationFrame(animationLoop);
+  c.clearRect(0, 0, world.width, world.height);
+  player.update();
+  enemies.forEach((enemy, index) => {
+    if (enemy.position.y >= world.height) {
+      setTimeout(() => {
+        enemies.splice(index, 1);
+      }, 0);
+    } else {
+      enemy.update();
+    }
+    if (
+      enemy.position.y + enemy.height >= player.position.y &&
+      enemy.position.y <= player.position.y + player.height &&
+      enemy.position.x >= player.position.x &&
+      enemy.position.x + enemy.width <= player.position.x + player.width
+    ) {
+      enemies.splice(index, 1);
+
+      lostLife();
+    }
+  });
+  frames++;
+};
 animationLoop();
 
+addEventListener("keydown", ({ key }) => {
+  switch (key) {
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = true;
+      console.log("gauche");
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = true;
+      console.log("droite");
+      break;
+  }
+});
 
-addEventListener('keydown',({key})=>{
-    
-    switch(key){
-    case 'ArrowLeft':
-             keys.ArrowLeft.pressed = true;
-             console.log('gauche');
-             break;
-         case 'ArrowRight':
-             keys.ArrowRight.pressed = true;
-             console.log('droite');
-             break;
-         } 
- })    
-      
-
-addEventListener('keyup',({key})=>{
-        switch(key){
-            case 'ArrowLeft':
-                keys.ArrowLeft.pressed = false;
-                console.log('gauche');
-                break;
-            case 'ArrowRight':
-                keys.ArrowRight.pressed = false;
-                console.log('droite');
-                break;
-            case ' ':
-                player.shoot();
-                console.log(missiles)
-        }
-         
-    })
-
-
-
-
+addEventListener("keyup", ({ key }) => {
+  switch (key) {
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = false;
+      console.log("gauche");
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = false;
+      console.log("droite");
+      break;
+    case " ":
+      player.shoot();
+      console.log(enemies);
+  }
+});
