@@ -12,4 +12,8 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   border: 2px dotted white;
+  background-image: url(/Assets/Img/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
