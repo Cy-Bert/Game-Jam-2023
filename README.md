@@ -31,4 +31,8 @@ Le développement du jeu s'est fait majoritairement avec le langage JavaScript, 
 
 L'hébergement du projet se fait sur le site Netlify, voici le lien qui mène sur notre jeu : https://hashiru-tanuki.netlify.app/
 
+Voici la vidéo teaser du jeu : https://youtu.be/GUUbZmOpDnM
+
+Amusez vous bien !
+
 
