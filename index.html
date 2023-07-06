@@ -20,17 +20,14 @@
 
   <body class="m-0 p-0 w-full text-center">
     <div
-      x-data="{ open: true }"
+      
       class="flex h-screen items-center justify-center"
     >
       <!-- homepage -->
-      <img x-show="open" class="z-10 drop-shadow-6xl" src="/background.png" alt="background" />
-      <canvas
-        class="w-10/12 h-5/6 absolute border-2 border-dotted bg-[url('/Assets/Img/background.jpg')] bg-center bg-cover "
-        id="gameBoard"
-      ></canvas>
+      <img class="z-10 drop-shadow-6xl" src="/background.png" alt="background" />
+      
       <div
-        x-show="open"
+       
         class="w-1/3 h-1/3 z-10 flex flex-col items-center justify-center gap-12 absolute "
       >
         <img src="/logo_hashiru_tanuki.png" alt="Hashiru Tanuki" class="w-96" />
@@ -40,11 +37,11 @@
           <img src="/blob.png" alt="" class="w-24 h-24" />
         </div>
         <!-- start -->
-        <button
-          @click="playSound; open = !open"
-          type="button"
+        <a
+          @click="playSound;"
+          
           class="active:drop-shadow-2xl hover:scale-95 duration-300"
-        >
+         href="/jeu.html">
           <img
             class="w-56 border-b-2 border-r-2 border-transparent border-solid active:border-black active:border-b-2 active:border-r-2"
             src="/start.svg"
@@ -54,7 +51,7 @@
             id="sound"
             src="/mixkit-player-select-notification-2037.mp3"
           ></audio>
-        </button>
+        </a>
 
         <!-- control board -->
         <div class="flex flex-col">
@@ -75,6 +72,6 @@
       </div>
     </div>
 
-    <script src="app.js"></script>
+
   </body>
 </html>
