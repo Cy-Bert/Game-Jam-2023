@@ -7,6 +7,7 @@ world.height = world.clientHeight;
 let frames = 0;
 const enemies = [];
 const base_spawn = [-3, 0, 3];
+let acceleration = 0;
 
 const keys = {
   ArrowLeft: { pressed: false },
@@ -49,11 +50,12 @@ class Player {
   }
 
   shoot() {
+    
     enemies.push(
       new Enemy({
         position: {
-          x: world.width / 2,
-          y: world.height / 5,
+          x: world.width / 2 - 75,
+          y: world.height / 5 - 75,
         },
       })
     );
@@ -81,24 +83,56 @@ class Player {
     this.draw();
   }
 }
-
+// let sprite = Math.floor(Math.random() * base_enemy.length);
+let base_enemy = [
+  ["Assets/img/batty_frame1.png", "Assets/img/batty_frame2.png"],
+  ["Assets/img/blobby_frame1.png", "Assets/img/blobby_frame2.png"],
+  ["Assets/img/position1.png", "Assets/img/position2.png"],
+  ["Assets/img/position_snake1.png", "Assets/img/position_snake_2.png"],
+  ["Assets/img/monstre1.png","Assets/img/monstre2.png"]
+];
 class Enemy {
   constructor({ position }) {
     this.position = position;
     this.velocity = {
       x: base_spawn[Math.floor(Math.random() * base_spawn.length)],
-      y: 5,
+      y: 5 + acceleration,
     };
-    this.width = 3;
-    this.height = 10;
+    this.width = 150;
+    this.height = 150;
+    this.image1 = new Image();
+    this.image1.src =
+      base_enemy[1][0];
+    this.image2 = new Image();
+    this.image2.src =
+      base_enemy[1][1];
+
+    this.currentImage = this.image1;
+    this.imageIndex = 1;
+    this.imageInterval = 10; // Intervalle pour alterner les images
+    this.imageCounter = 0;
   }
   draw() {
-    c.fillStyle = "red";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    c.drawImage(
+      this.currentImage,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
+  }
+  animate() {
+    this.imageCounter++;
+    if (this.imageCounter >= this.imageInterval) {
+      this.imageCounter = 0;
+      this.imageIndex = this.imageIndex === 1 ? 2 : 1; // Alterne entre 1 et 2
+      this.currentImage = this.imageIndex === 1 ? this.image1 : this.image2;
+    }
   }
   update() {
     this.position.y += this.velocity.y;
     this.position.x += this.velocity.x;
+    this.animate();
     this.draw();
   }
 }
@@ -110,7 +144,7 @@ const lostLife = () => {
   lifes--;
   if (lifes <= 0) {
     alert("perdu");
-    init();
+    location.reload();
   }
 };
 
@@ -138,6 +172,9 @@ const animationLoop = () => {
       lostLife();
     }
   });
+  if (frames % 25 === 0) {
+    player.shoot();
+  }
   frames++;
 };
 animationLoop();
@@ -146,11 +183,9 @@ addEventListener("keydown", ({ key }) => {
   switch (key) {
     case "ArrowLeft":
       keys.ArrowLeft.pressed = true;
-      console.log("gauche");
       break;
     case "ArrowRight":
       keys.ArrowRight.pressed = true;
-      console.log("droite");
       break;
   }
 });
@@ -159,14 +194,9 @@ addEventListener("keyup", ({ key }) => {
   switch (key) {
     case "ArrowLeft":
       keys.ArrowLeft.pressed = false;
-      console.log("gauche");
       break;
     case "ArrowRight":
       keys.ArrowRight.pressed = false;
-      console.log("droite");
       break;
-    case " ":
-      player.shoot();
-      console.log(enemies);
   }
 });
