@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-  </head>
-  <body>
-    <canvas id="gameBoard"></canvas>
-    <script src="app.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Hashiru Tanuki</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="m-0 p-0 w-full text-center">
+  <div x-data="{ open: true }" class="flex h-screen items-center justify-center">
+    <!-- homepage -->
+    <img x-show="open" class="z-10" src="/background.png" alt="">
+    <canvas class="w-10/12 h-5/6 absolute border-2 border-dotted bg-black" id="gameBoard"></canvas>
+    <div x-show="open" 
+      class="w-1/3 h-1/3 z-10 flex flex-col items-center justify-center gap-12 absolute">
+      <img src="/logo_hashiru_tanuki.png" alt="Hashiru Tanuki" class="w-96">
+      <img src="/bat.png" alt="" class="w-24 h24 absolute left-1 top-1">
+      <div class="z-20 flex absolute gap-96 bottom-1 ">
+        <img src="/flower.png" alt="" class="w-24 h-24 bottom-1">
+        <img src="/blob.png" alt="" class="w-24 h-24">
+      </div>
+      <!-- start -->
+      <button @click="open = !open" type="button" class="active:drop-shadow-2xl hover:scale-95 duration-300">
+        <img class="w-56 border-b-2 border-r-2 border-transparent border-solid active:border-black active:border-b-2 active:border-r-2" src="/start.svg" alt="">
+      </button>
+      <!-- control board -->
+      <div class="flex flex-col">
+        <img class="w-40" src="/controls_board.png" alt="">
+        <div class="flex justify-center w-40">
+          <img class="w-24 rotate-180 -mt-1" src="/arrow.png" alt="">
+          <img class="w-24" src="/arrow.png" alt="">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
 </html>
