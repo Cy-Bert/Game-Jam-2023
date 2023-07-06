@@ -4,11 +4,12 @@ const c = world.getContext("2d");
 world.width = world.clientWidth;
 world.height = world.clientHeight;
 
-let frames = 0;
-const enemies = [];
-const base_spawn = [-3, 0, 3];
-let acceleration = 0;
+let frames = 0; // compteur de frames
+const enemies = []; // Tableau des enemies present
+const base_spawn = [-3, 0, 3]; // tableau des 3 differente trajectoire
+let acceleration = 0; // Variable d'acceleration pour l'augmentation de difficulté
 
+// reset de la config des touches
 const keys = {
   ArrowLeft: { pressed: false },
   ArrowRight: { pressed: false },
@@ -141,11 +142,12 @@ class Enemy {
 
 const player = new Player();
 
+
 let lifes = 1;
 const lostLife = () => {
   lifes--;
   if (lifes <= 0) {
-    alert("perdu");
+     alert('You Loose !!!!!! ')
     location.reload();
   }
 };
