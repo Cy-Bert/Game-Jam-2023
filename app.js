@@ -83,7 +83,7 @@ class Player {
     this.draw();
   }
 }
-// let sprite = Math.floor(Math.random() * base_enemy.length);
+
 let base_enemy = [
   ["Assets/img/batty_frame1.png", "Assets/img/batty_frame2.png"],
   ["Assets/img/blobby_frame1.png", "Assets/img/blobby_frame2.png"],
@@ -91,6 +91,7 @@ let base_enemy = [
   ["Assets/img/position_snake1.png", "Assets/img/position_snake_2.png"],
   ["Assets/img/monstre1.png","Assets/img/monstre2.png"]
 ];
+let sprite = Math.floor(Math.random() * base_enemy.length);
 class Enemy {
   constructor({ position }) {
     this.position = position;
@@ -101,11 +102,12 @@ class Enemy {
     this.width = 150;
     this.height = 150;
     this.image1 = new Image();
+    const sprite = Math.floor(Math.random() * base_enemy.length);
     this.image1.src =
-      base_enemy[1][0];
+      base_enemy[sprite][0];
     this.image2 = new Image();
     this.image2.src =
-      base_enemy[1][1];
+      base_enemy[sprite][1];
 
     this.currentImage = this.image1;
     this.imageIndex = 1;
