@@ -1,13 +1,45 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-        <title>Mon Space invader</title>
-    </head>
-    <body>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Mon Space invader</title>
+    <script src="app.js" defer></script>
+    <script src="timer.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              bgTimerOne: "#E0C187",
+              timerColor: "FFF2B8"
+            },
+            fontFamily: {
+              retro: ["retro_computer"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @font-face {
+        font-family: "retro_computer";
+        src: url(fonts/retro_computer.ttf);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameBoard"></canvas>
 
-    <canvas id="gameBoard" ></canvas>
-        
-    <script src="app.js" ></script>
-    </body>
-</html> 
- 
+    <div class="flex flex-row  ">
+      <div class="">
+        <img class="w-60" src="assets/panel_timer.png" alt="Chronomètre" />
+    </div>
+
+      <div id="timer" class="font-bold text-3xl font-retro text-timerColor w-56 absolute mt-24 ml-24 "></div>
+
+      <div id="heart">
+        <img src="" alt="">
+      </div>
+    </div>
+  </body>
+</html>
