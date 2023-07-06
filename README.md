@@ -13,7 +13,7 @@ Créer un jeu sur le thème "Hugo Délire" en 2 jours.
 [Librairies autorisées](https://vinvui.notion.site/Libraries-Frameworks-Softwares-fb3e8525b59f48019a77a9f86c4932d5)
 
 ## Stack
-HTML / CSS / JS
+HTML / CSS / JS / ALPINE JS / TAILWIND CSS
 
 ## Développement
 
